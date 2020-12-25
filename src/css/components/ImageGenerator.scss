@@ -3,16 +3,32 @@ button {
     font-size: 16px;
     margin: 10px;
     margin-right: 0;
-    background-color: #06f;
+    background-color: #072F5F;
     color: #fff;
-    border: 2px solid #06f;
+    border: 2px solid #072F5F;
+
+    &:focus {
+        outline: none;
+        box-shadow: none;
+    }
 }
 
 input {
     padding: 10px;
     font-size: 16px;
-    border: 2px solid #fff;
+    border: 2px solid #808080;
     width: 165px;
     margin-right: 20px !important;
     outline: none;
+}
+
+img {
+
+}
+
+.button-red {
+    background-color: #b80f0a;
+    color: #fff;
+    border-radius: 4px;
+    
 }

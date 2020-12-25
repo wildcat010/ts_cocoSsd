@@ -11,8 +11,10 @@ function App() {
         <h3>
           Image recognition with cocoSsd
         </h3>
-        <ImageGenerator/>
       </header>
+      <body>
+      <ImageGenerator/>
+      </body>
     </div>
   );
 }
