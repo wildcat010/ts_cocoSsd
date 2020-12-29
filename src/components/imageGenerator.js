@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import './../css/components/ImageGenerator.scss';
 import ImageRender from "./imageRender";
 import SearchLabels from "./searchLabels";
+import * as cocoSsd from "@tensorflow-models/coco-ssd";
 
 function ImageGenerator(props) {
-
     /*api key
     * 
     * 563492ad6f9170000100000131cfe086a8d94c53927c7b4ff9dd41ff
@@ -13,21 +13,29 @@ function ImageGenerator(props) {
     const [search, setSearch] = useState('');
     const [imgState, setimgState] = useState({isLoaded: false, img: ""});
     const [arrayImage, setArrayImage] = useState([]);
+    const [model, setModel] = useState(undefined);
+
+    const childRef = useRef(null);
 
     useEffect(() => {
         const script = document.createElement('script');
-    
         script.src = "//cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js";
         script.async = true;
-
-
         document.body.appendChild(script);
+
+
+        alert("wait for the library cocoSSD to load");
+        cocoSsd.load().then(modelLoaded => {
+            alert("cocoSSD loaded");
+            setModel(modelLoaded);
+        });
         
     
         return () => {
             document.body.removeChild(script);
         }
     }, []);
+
 
     const searchImage = (e) => {
         e.preventDefault();
@@ -48,6 +56,8 @@ function ImageGenerator(props) {
             return response.json()})
         .then(image => {
                 generateRandom(image.photos);
+                debugger;
+                childRef.current.childProcess();
             },
             (error) => {
                 alert("Error loading the image API");
@@ -63,7 +73,7 @@ function ImageGenerator(props) {
         return rand;
     }
 
-    const generateRandom = (photos) => {
+    const generateRandom = async(photos) => {
 
         const rand = randomNumber(1,photos.length);
 
@@ -75,8 +85,9 @@ function ImageGenerator(props) {
 
         //remove id photo from array
         photos.splice(rand-1, 1);
-        setArrayImage(photos);
-        
+        const r = await setArrayImage(photos);
+
+        console.log(r)
     }
 
     const clickRandomPicture = () => {
@@ -100,7 +111,7 @@ function ImageGenerator(props) {
             </input>
             <button type="submit" className="button" >Search</button>
         </form>
-        <ImageRender image={imgState} onChange={clickRandomPicture}></ImageRender>
+        <ImageRender image={imgState} onChange={clickRandomPicture} model={model} ref={childRef}></ImageRender>
         </>
     );
 }
