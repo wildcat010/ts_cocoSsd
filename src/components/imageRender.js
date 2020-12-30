@@ -1,21 +1,21 @@
 import React, {useState, forwardRef, useImperativeHandle } from 'react';
 import './../css/components/ImageRender.scss';
 import "@tensorflow/tfjs";
-import DrawScene from "./DrawScene";
-import { Surface } from '@progress/kendo-drawing';
+import {DrawScene, RemoveScenes} from "./DrawScene";
 
 const ImageRender = forwardRef((props, ref) => {
     
     const [nbrElement, setNbrElement] = useState(0);
     const [elements, setElements] = useState([]);
 
-    const clickRandom = async(myProcess) => {
+    const clickRandom = (myProcess) => {
         resetPrediction();
-        await props.onChange();
+        props.onChange();
+        RemoveScenes().then(()=>{
         setTimeout(() => {
             myProcess();
         }, 1000);
-    
+        });
     }
 
     useImperativeHandle(ref, () => {
@@ -30,14 +30,16 @@ const ImageRender = forwardRef((props, ref) => {
     }
 
     const childProcess = () => {
+        RemoveScenes().then(()=>{
         setTimeout(() => {
             process();
         }, 1000);
+        });
     }
 
 
     const process = () => {
-         const image = document.getElementById("imageToProcess");
+        const image = document.getElementById("imageToProcess");
 
 
         props.model.detect(image.children[0]).then(function (predictions) {
@@ -56,11 +58,7 @@ const ImageRender = forwardRef((props, ref) => {
                 myArray.push(predict);
 
                 //draw element
-                debugger;
-                const e = document.getElementById("surface");
-                const surface = Surface.create(e);
-
-                DrawScene(surface,element);
+                DrawScene(element);
             });
             setElements(myArray);
         });
@@ -79,9 +77,9 @@ const ImageRender = forwardRef((props, ref) => {
                         <img
                             src={props.image.img}
                             alt="from pexel website"
-                            crossorigin="anonymous"
+                            crossOrigin="anonymous"
                         />
-                        <div id="surface" />
+                        
                     </div>
                     <div className="identification">
                         <h4>Identifications:</h4>

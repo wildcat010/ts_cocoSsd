@@ -82,19 +82,16 @@ function ImageGenerator(props) {
        
         //remove id photo from array
         photos.splice(rand-1, 1);
-        const r = await setArrayImage(photos);
-
-        console.log(r)
+        await setArrayImage(photos);
     }
 
     const clickRandomPicture = () => {
-        /*if(arrayImage.length === 0){
+        if(arrayImage.length === 0){
             ajaxQuery();
         }
         else{
             generateRandom(arrayImage);
-        }*/
-        generateRandom(arrayImage);
+        }
     }
 
     return (
