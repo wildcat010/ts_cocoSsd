@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@progress/kendo-drawing": "^1.9.3",
     "@tensorflow-models/coco-ssd": "^2.2.1",
     "@tensorflow-models/mobilenet": "^2.0.4",
     "@tensorflow/tfjs": "^2.7.0",
@@ -13,7 +14,6 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.1",
-    "reactjs-popup": "^2.0.4",
     "web-vitals": "^0.2.4"
   },
   "scripts": {

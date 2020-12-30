@@ -23,14 +23,12 @@ function ImageGenerator(props) {
         script.async = true;
         document.body.appendChild(script);
 
-
         alert("wait for the library cocoSSD to load");
         cocoSsd.load().then(modelLoaded => {
             alert("cocoSSD loaded");
             setModel(modelLoaded);
         });
-        
-    
+
         return () => {
             document.body.removeChild(script);
         }
@@ -56,7 +54,6 @@ function ImageGenerator(props) {
             return response.json()})
         .then(image => {
                 generateRandom(image.photos);
-                debugger;
                 childRef.current.childProcess();
             },
             (error) => {
@@ -82,7 +79,7 @@ function ImageGenerator(props) {
             img: photos[rand-1].src.medium,
             id: photos[rand-1].id
         });
-
+       
         //remove id photo from array
         photos.splice(rand-1, 1);
         const r = await setArrayImage(photos);
@@ -91,12 +88,13 @@ function ImageGenerator(props) {
     }
 
     const clickRandomPicture = () => {
-        if(arrayImage.length === 0){
+        /*if(arrayImage.length === 0){
             ajaxQuery();
         }
         else{
             generateRandom(arrayImage);
-        }
+        }*/
+        generateRandom(arrayImage);
     }
 
     return (

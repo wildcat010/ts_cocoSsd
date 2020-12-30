@@ -1,8 +1,8 @@
 import React, {useState, forwardRef, useImperativeHandle } from 'react';
 import './../css/components/ImageRender.scss';
 import "@tensorflow/tfjs";
-
-
+import DrawScene from "./DrawScene";
+import { Surface } from '@progress/kendo-drawing';
 
 const ImageRender = forwardRef((props, ref) => {
     
@@ -14,7 +14,7 @@ const ImageRender = forwardRef((props, ref) => {
         await props.onChange();
         setTimeout(() => {
             myProcess();
-        }, 500);
+        }, 1000);
     
     }
 
@@ -32,12 +32,13 @@ const ImageRender = forwardRef((props, ref) => {
     const childProcess = () => {
         setTimeout(() => {
             process();
-        }, 500);
+        }, 1000);
     }
 
 
     const process = () => {
-        const image = document.getElementById("imageToProcess");
+         const image = document.getElementById("imageToProcess");
+
 
         props.model.detect(image.children[0]).then(function (predictions) {
             if(predictions.length === 0)
@@ -53,11 +54,19 @@ const ImageRender = forwardRef((props, ref) => {
                     score: Math.round(element.score*100)
                 };
                 myArray.push(predict);
+
+                //draw element
+                debugger;
+                const e = document.getElementById("surface");
+                const surface = Surface.create(e);
+
+                DrawScene(surface,element);
             });
             setElements(myArray);
-            
         });
     }
+
+    
     
     return (
         <>
@@ -66,12 +75,13 @@ const ImageRender = forwardRef((props, ref) => {
                 <button className="button-red" onClick={() => clickRandom(process)}>Random</button>
                 <br></br>
                 <div className="container">
-                    <div id="imageToProcess">
+                    <div id="imageToProcess" >
                         <img
                             src={props.image.img}
                             alt="from pexel website"
                             crossorigin="anonymous"
                         />
+                        <div id="surface" />
                     </div>
                     <div className="identification">
                         <h4>Identifications:</h4>

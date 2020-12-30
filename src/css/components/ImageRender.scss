@@ -1,8 +1,23 @@
 .container {
     display: flex;
     justify-content: center;
+    position: relative;
 }
 
 .identification {
     margin-left: 20px;
+}
+
+#imageToProcess{
+    position: relative;
+}
+
+img{
+    
+}
+
+#surface {
+    position: absolute;
+    border: 1px solid green;
+    z-index: 1;
 }
