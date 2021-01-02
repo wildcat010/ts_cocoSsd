@@ -83,7 +83,7 @@ const ImageRender = forwardRef((props, ref) => {
                     </div>
                     <div className="identification">
                         <h4>Identifications:</h4>
-                        {nbrElement} element found:
+                        {nbrElement} element(s) found:
                         <ul>
                             {elements.map((i) => 
                             (<li>class: {i.class} - {i.score}%</li>)

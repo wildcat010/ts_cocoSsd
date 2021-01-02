@@ -4,11 +4,8 @@ import ImageRender from "./imageRender";
 import SearchLabels from "./searchLabels";
 import * as cocoSsd from "@tensorflow-models/coco-ssd";
 
+
 function ImageGenerator(props) {
-    /*api key
-    * 
-    * 563492ad6f9170000100000131cfe086a8d94c53927c7b4ff9dd41ff
-    */
 
     const [search, setSearch] = useState('');
     const [imgState, setimgState] = useState({isLoaded: false, img: ""});
@@ -23,9 +20,9 @@ function ImageGenerator(props) {
         script.async = true;
         document.body.appendChild(script);
 
-        alert("wait for the library cocoSSD to load");
+        props.notification("loading");
         cocoSsd.load().then(modelLoaded => {
-            alert("cocoSSD loaded");
+            props.notification("ready");
             setModel(modelLoaded);
         });
 

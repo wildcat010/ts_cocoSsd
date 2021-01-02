@@ -1,7 +1,32 @@
 import './App.css';
 import ImageGenerator from "./components/imageGenerator";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
+
+  const notify = (type) => {
+    switch(type){
+      case 'ready':
+        toast.success('Model loaded', {
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          });
+        break;
+      case 'loading':
+        toast("Loading the model, please wait ...", {
+          hideProgressBar: true,
+          closeOnClick: false,
+          pauseOnHover: false,
+          draggable: false,});
+        break;
+      default:
+    }
+    
+}
   return (
     <div className="App">
       <header className="App-header">
@@ -13,7 +38,8 @@ function App() {
         </h3>
       </header>
       <body>
-      <ImageGenerator/>
+      <ImageGenerator notification={notify}/>
+      <ToastContainer />
       </body>
     </div>
   );

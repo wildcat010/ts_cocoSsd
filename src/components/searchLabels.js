@@ -10,7 +10,6 @@ function SearchLabels(props) {
 
     return (
         <div className="labels-area">
-            <h1>Labels</h1>  
             <div className="labels">
             <Label text="people" selectLabel={selectLabel}></Label>
             <Label text="face" selectLabel={selectLabel}></Label>
