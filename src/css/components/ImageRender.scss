@@ -2,18 +2,27 @@
     display: flex;
     justify-content: center;
     position: relative;
+    flex-direction: column;
 }
 
 .identification {
-    margin-left: 20px;
+    
 }
 
 #imageToProcess{
-    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+img {
+    @media only screen and (max-width: 400px) {
+        width:100%;
+    }
 }
 
 ul {
-    text-align: left;
+    text-align: center;
+    list-style-position: inside;
 }
 
 #surface {
@@ -21,3 +30,5 @@ ul {
     border: 1px solid green;
     z-index: 1;
 }
+
+
