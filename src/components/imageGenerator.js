@@ -5,7 +5,7 @@ import SearchLabels from "./searchLabels";
 import * as cocoSsd from "@tensorflow-models/coco-ssd";
 
 
-function ImageGenerator() {
+function ImageGenerator(props) {
 
     const [search, setSearch] = useState('');
     const [imgState, setimgState] = useState({isLoaded: false, img: ""});
@@ -30,7 +30,7 @@ function ImageGenerator() {
         return () => {
             document.body.removeChild(script);
         }
-    }, []);
+    }, [props]);
 
 
     const searchImage = (e) => {
