@@ -11,7 +11,7 @@ function ImageGenerator() {
     const [imgState, setimgState] = useState({isLoaded: false, img: ""});
     const [arrayImage, setArrayImage] = useState([]);
     const [model, setModel] = useState(undefined);
-    const [props] = useState(0);
+
 
     const childRef = useRef(null);
 
