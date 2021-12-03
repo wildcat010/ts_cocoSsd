@@ -20,8 +20,11 @@ function ImageGenerator(props) {
         script.async = true;
         document.body.appendChild(script);
 
+        console.log("load");
         cocoSsd.load().then(modelLoaded => {
+        console.log("loaded");
            setModel(modelLoaded);
+           console.log("finish");
         });
 
         return () => {
