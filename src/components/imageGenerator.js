@@ -12,6 +12,8 @@ function ImageGenerator(props) {
     const [arrayImage, setArrayImage] = useState([]);
     const [model, setModel] = useState(undefined);
 
+    const [disable, setDisable] = React.useState(true);
+
     const childRef = useRef(null);
 
     useEffect(() => {
@@ -20,11 +22,9 @@ function ImageGenerator(props) {
         script.async = true;
         document.body.appendChild(script);
 
-        console.log("load");
         cocoSsd.load().then(modelLoaded => {
-        console.log("loaded");
            setModel(modelLoaded);
-           console.log("finish");
+           setDisable(false);
         });
 
         return () => {
@@ -92,18 +92,37 @@ function ImageGenerator(props) {
         }
     }
 
+    function Research() {
+        if (disable) {
+            return (
+                <div>
+                  <h1>COCOSSD is Loading .....!</h1>
+                    <div>
+                      It can take few minutes.
+                    </div>
+                </div>
+              );
+        } else {
+            return (
+                <>
+                <SearchLabels setSearch={setSearch}></SearchLabels>
+                    <form onSubmit={searchImage}>
+                        <input
+                            onChange={event => 
+                                setSearch(event.target.value)} 
+                            value={search}
+                            >
+                        </input>
+                        <button type="submit" className="button" >Search</button>
+                    </form>
+                </>
+            );
+        }
+      }
+
     return (
         <>
-        <SearchLabels setSearch={setSearch}></SearchLabels>
-        <form onSubmit={searchImage}>
-            <input
-                onChange={event => 
-                    setSearch(event.target.value)} 
-                value={search}
-                >
-            </input>
-            <button type="submit" className="button" >Search</button>
-        </form>
+        <Research/>
         <ImageRender image={imgState} onChange={clickRandomPicture} model={model} ref={childRef}></ImageRender>
         </>
     );
