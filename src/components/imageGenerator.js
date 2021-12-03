@@ -5,25 +5,25 @@ import SearchLabels from "./searchLabels";
 import * as cocoSsd from "@tensorflow-models/coco-ssd";
 
 
-function ImageGenerator(props) {
+function ImageGenerator() {
 
     const [search, setSearch] = useState('');
     const [imgState, setimgState] = useState({isLoaded: false, img: ""});
     const [arrayImage, setArrayImage] = useState([]);
     const [model, setModel] = useState(undefined);
+    const [props] = useState(0);
 
     const childRef = useRef(null);
-    const propss = props;
 
-    useEffect((propss) => {
+    useEffect(() => {
         const script = document.createElement('script');
         script.src = "//cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js";
         script.async = true;
         document.body.appendChild(script);
 
-        propss.notification("loading");
+        props.notification("loading");
         cocoSsd.load().then(modelLoaded => {
-            propss.notification("ready");
+            props.notification("ready");
             setModel(modelLoaded);
         });
 
