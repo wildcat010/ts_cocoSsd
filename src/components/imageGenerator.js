@@ -20,18 +20,14 @@ function ImageGenerator(props) {
         script.async = true;
         document.body.appendChild(script);
 
-        // eslint-disable-next-line
-        props.notification("loading");
         cocoSsd.load().then(modelLoaded => {
-            // eslint-disable-next-line
-            props.notification("ready");
-            setModel(modelLoaded);
+           setModel(modelLoaded);
         });
 
         return () => {
             document.body.removeChild(script);
         }
-    });
+    }, []);
 
 
     const searchImage = (e) => {

@@ -38,10 +38,10 @@ function App() {
           Image recognition with cocoSsd
         </h3>
       </header>
-      <body>
+      <div>
       <ImageGenerator notification={notify}/>
       <ToastContainer />
-      </body>
+      </div>
     </div>
   );
 }
