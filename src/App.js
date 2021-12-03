@@ -2,6 +2,7 @@ import './App.css';
 import ImageGenerator from "./components/imageGenerator";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import React from 'react';
 
 function App() {
 
