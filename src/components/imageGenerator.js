@@ -13,16 +13,17 @@ function ImageGenerator(props) {
     const [model, setModel] = useState(undefined);
 
     const childRef = useRef(null);
+    const propss = props;
 
-    useEffect((props) => {
+    useEffect((propss) => {
         const script = document.createElement('script');
         script.src = "//cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js";
         script.async = true;
         document.body.appendChild(script);
 
-        props.notification("loading");
+        propss.notification("loading");
         cocoSsd.load().then(modelLoaded => {
-            props.notification("ready");
+            propss.notification("ready");
             setModel(modelLoaded);
         });
 
