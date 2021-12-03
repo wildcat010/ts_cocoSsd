@@ -14,7 +14,7 @@ function ImageGenerator(props) {
 
     const childRef = useRef(null);
 
-    useEffect(() => {
+    useEffect((props) => {
         const script = document.createElement('script');
         script.src = "//cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js";
         script.async = true;
