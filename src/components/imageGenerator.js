@@ -12,7 +12,6 @@ function ImageGenerator(props) {
     const [arrayImage, setArrayImage] = useState([]);
     const [model, setModel] = useState(undefined);
 
-
     const childRef = useRef(null);
 
     useEffect(() => {
@@ -21,8 +20,10 @@ function ImageGenerator(props) {
         script.async = true;
         document.body.appendChild(script);
 
+        // eslint-disable-next-line
         props.notification("loading");
         cocoSsd.load().then(modelLoaded => {
+            // eslint-disable-next-line
             props.notification("ready");
             setModel(modelLoaded);
         });
@@ -30,7 +31,7 @@ function ImageGenerator(props) {
         return () => {
             document.body.removeChild(script);
         }
-    }, [props]);
+    });
 
 
     const searchImage = (e) => {
