@@ -20,9 +20,9 @@ function ImageGenerator(props) {
         script.async = true;
         document.body.appendChild(script);
 
-        props.notification("loading");
+        //props.notification("loading");
         cocoSsd.load().then(modelLoaded => {
-            props.notification("ready");
+            //props.notification("ready");
             setModel(modelLoaded);
         });
 
